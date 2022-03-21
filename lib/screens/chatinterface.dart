@@ -103,9 +103,16 @@ class _MyHomePageState extends State<MyHomePage> {
 									),
 								),
 
-							// 	leading: IconButton ( 
-								
-							// ),
+								leading: IconButton ( 
+                                    icon: Icon (
+                                        Icons.camera_alt,
+                                        size: 28.0,
+                                    ),
+
+                                    onPressed: () {
+                                        // Nemsara add your'e code here
+                                    },
+							),
 
 								trailing: IconButton (
 									

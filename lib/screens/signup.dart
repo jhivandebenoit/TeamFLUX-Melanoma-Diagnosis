@@ -1,6 +1,4 @@
 import 'package:chat_ui/screens/chats.dart';
-import 'package:chat_ui/services/authentication.dart';
-import 'package:chat_ui/services/database.dart';
 import 'package:chat_ui/widgets/widget.dart';
 import 'package:flutter/material.dart';
 
@@ -177,8 +175,8 @@ class _SignUpState extends State<SignUp> {
                                         ),
                                         SizedBox(height: 10.0),
                                         ],
-                                            ),
-                                        ),
+                                    ),
+                                    ),
                                     ),
                                 ),
 		);

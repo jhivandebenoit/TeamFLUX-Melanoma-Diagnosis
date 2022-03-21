@@ -1,6 +1,4 @@
-import 'package:chat_ui/helper/authenticate.dart';
 import 'package:chat_ui/screens/chatinterface.dart';
-import 'package:chat_ui/services/authentication.dart';
 import 'package:flutter/material.dart';
 
 class ChatRoom extends StatefulWidget {

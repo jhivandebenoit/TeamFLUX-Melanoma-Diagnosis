@@ -1,11 +1,10 @@
-import 'dart:html';
+// import 'dart:html';
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import 'package:dialogflow_flutter/dialogflowFlutter.dart';
 import 'package:dialogflow_flutter/googleAuth.dart';
 import 'package:dialogflow_flutter/language.dart';
-import 'package:dialogflow_flutter/message.dart';
 
 class MyHomePage extends StatefulWidget {
 	// MyHomePage({  Key? key,  required this.title }) : super(key: key);
@@ -15,7 +14,7 @@ class MyHomePage extends StatefulWidget {
 	_MyHomePageState createState() => _MyHomePageState();
 }
 
-File? selectedImage;
+// File? selectedImage;
 String? message = " ";
 
 class _MyHomePageState extends State<MyHomePage> {

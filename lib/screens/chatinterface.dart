@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_dialogflow/dialogflow_v2.dart';
@@ -13,6 +15,9 @@ class MyHomePage extends StatefulWidget {
 	@override
 	_MyHomePageState createState() => _MyHomePageState();
 }
+
+File? selectedImage;
+String? message = " ";
 
 class _MyHomePageState extends State<MyHomePage> {
 // this is the Dialogflow API call and its commented out for the Python file @Nemsara 
@@ -54,7 +59,11 @@ class _MyHomePageState extends State<MyHomePage> {
 			body: Container ( 
 				child: Column (
 					children: <Widget> [
-						
+
+            // ignore: prefer_const_constructors
+            // Nems edit
+            if (selectedImage == null) Text("Choose an image to uploade") else Image.file(selectedImage!)
+            
 						Flexible(child: ListView.builder  (
 							reverse:  true,
 							itemCount: messages.length,
@@ -106,15 +115,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
 									),
 								),
-
+ 
 								leading: IconButton ( 
+
                                     icon: Icon (
                                         Icons.camera_alt,
                                         size: 28.0,
                                     ),
-
                                     onPressed: () {
-                                        // Nemsara add your'e code here
+                                      //-----------------------------------
+                                              
+                                                                    
                                     },
 							),
 

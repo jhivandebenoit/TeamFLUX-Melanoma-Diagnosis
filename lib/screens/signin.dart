@@ -1,6 +1,10 @@
 import 'package:chat_ui/screens/chats.dart';
 import 'package:chat_ui/widgets/widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:chat_ui/services/authentication.dart';
+import 'package:chat_ui/services/database.dart';
+import 'package:chat_ui/helper/authenticate.dart';
 
 class SignIn extends StatefulWidget {
 
@@ -12,28 +16,46 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-    bool isLoading = false;
+    TextEditingController emailTextEditingController = TextEditingController();
+    TextEditingController passwordTextEditingController = TextEditingController();
 
-    loginUser() {
-    // if (formKey.currentState!.validate()) {
-        
-    // 	Map<String, String> userInfoMap = {
-    // 			"name" : userNameTextEditingController.text,
-    // 			"email" : emailTextEditingController.text
-    // 		};
-            
-        setState(() {
-            isLoading = true; 
-        });
+    AuthMethods authService = new AuthMethods();
 
-    // 	authMethods.signUpwithEmailAndPassword(emailTextEditingController.text, passwordTextEditingController.text).then((val) {
-    // 		// print("${val.userId}");
+  final formKey = GlobalKey<FormState>();
 
-    // 		// databaseMethods.uploadUserInfo(userInfoMap);
-            Navigator.pushReplacement(context, MaterialPageRoute(
-                builder: (context) => ChatRoom()
-            )   );
-}
+  bool isLoading = false;
+
+  signIn() async {
+    if (formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+
+      await authService
+          .signInWithEmailAndPassword(
+              emailTextEditingController.text, passwordTextEditingController.text)
+          .then((result) async {
+        if (result != null)  {
+        //   QuerySnapshot userInfoSnapshot =
+        //       await DatabaseMethods().getUserInfo(emailTextEditingController.text);
+
+        //   HelperFunctions.saveUserLoggedInSharedPreference(true);
+        //   HelperFunctions.saveUserNameSharedPreference(
+        //       userInfoSnapshot.documents[0].data["userName"]);
+        //   HelperFunctions.saveUserEmailSharedPreference(
+        //       userInfoSnapshot.documents[0].data["userEmail"]);
+
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => ChatRoom()));
+        } else {
+          setState(() {
+            isLoading = false;
+            //show snackbar
+          });
+        }
+      });
+    }
+  }
 
 	@override
 	Widget build(BuildContext context) {
@@ -60,16 +82,46 @@ class _SignInState extends State<SignIn> {
                                                   child: Column (
                                                       mainAxisSize: MainAxisSize.min,
                                                   children: [ 
-                                                    SizedBox(height: 80.0),
-                                                    TextField(
-                                                        decoration: inputFeildDecoration ("Email"),
-                                                    ),
-                                                  SizedBox(height: 20.0),
-            
-                                                      TextField(
-                                                          obscureText: true,
-                                                          decoration: inputFeildDecoration ("Password"),
+                                                      Form(
+                                                          key: formKey,
+                                                          child: Column(
+                                                              children: [
+                                                                  TextFormField(
+                                                                        validator: (val) {
+                                                                            return RegExp(
+                                                                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                                                                    .hasMatch(val!)
+                                                                                ? null
+                                                                                : "Please Enter Correct Email";
+                                                                        },
+                                                                        controller: emailTextEditingController,
+                                                                        decoration: inputFeildDecoration("Email"),
+                                                                        ),
+                                                                        TextFormField(
+                                                                        obscureText: true,
+                                                                        validator: (val) {
+                                                                            return val!.length > 6
+                                                                                ? null
+                                                                                : "Enter Password 6+ characters";
+                                                                        },
+                                                                        controller: passwordTextEditingController,
+                                                                        decoration: inputFeildDecoration("Password"),
+                                                                        ),
+                                                              ]),
                                                       ),
+                                                    SizedBox(height: 80.0),
+
+                                                //     TextField(
+                                                //         controller: emailTextEditingController,
+                                                //         decoration: inputFeildDecoration ("Email"),
+                                                //     ),
+                                                //   SizedBox(height: 20.0),
+            
+                                                //       TextField(
+                                                //           obscureText: true,
+                                                //           controller: passwordTextEditingController,
+                                                //           decoration: inputFeildDecoration ("Password"),
+                                                //       ),
                                                   SizedBox(height: 20.0),
             
                                                       Container(
@@ -88,7 +140,7 @@ class _SignInState extends State<SignIn> {
 
                                                       GestureDetector(
                                                           onTap: () {
-                                                              loginUser();
+                                                              signIn();
                                                           },
                                                       
                                                       child: Container(

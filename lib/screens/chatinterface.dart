@@ -1,5 +1,4 @@
 import 'dart:html';
-
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_dialogflow/dialogflow_v2.dart';
@@ -62,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
             // ignore: prefer_const_constructors
             // Nems edit
-            if (selectedImage == null) Text("Choose an image to uploade") else Image.file(selectedImage!)
+            // if (selectedImage == null) Text("Choose an image to uploade") else Image.file(selectedImage!);
             
 						Flexible(child: ListView.builder  (
 							reverse:  true,

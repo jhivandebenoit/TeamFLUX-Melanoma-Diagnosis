@@ -1,6 +1,10 @@
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dialogflow/dialogflow_v2.dart';
+// import 'package:flutter_dialogflow/dialogflow_v2.dart';
+import 'package:dialogflow_flutter/dialogflowFlutter.dart';
+import 'package:dialogflow_flutter/googleAuth.dart';
+import 'package:dialogflow_flutter/language.dart';
+import 'package:dialogflow_flutter/message.dart';
 
 class MyHomePage extends StatefulWidget {
 	// MyHomePage({  Key? key,  required this.title }) : super(key: key);
@@ -17,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
 		AuthGoogle authGoogle = await AuthGoogle(
 				fileJson: "assets/melano-chatbot-nlru-8b72c52e3531.json"
 				) .build() ;
-		Dialogflow dialogflow = Dialogflow( authGoogle: authGoogle, language: Language.english);
+		DialogFlow dialogflow = DialogFlow( authGoogle: authGoogle, language: Language.english);
 		AIResponse aiResponse = await dialogflow.detectIntent(query);
 		setState(() {
 			messages.insert(0, {
@@ -43,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.white,
                     ),
                 ),
-                backgroundColor: Color.fromARGB(169, 49, 163, 139),
+                backgroundColor: Color.fromRGBO(49, 163, 139, 0.663),
                 elevation: 0,
             ),
 

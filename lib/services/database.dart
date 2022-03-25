@@ -1,16 +1,15 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-// class DatabaseMethods {
+class DatabaseMethods {
 
-// 	getUsersByUsername (String username) { 
+	getUsersByUsername (String username) { 
 
-// 	}
+	}
 
-// 	uploadUserInfo (userMap) {
-// 		FirebaseFirestore.instance.collection("users") 
-// 			.add(userMap).catchError; (e) {
-// 				print(e.toString());
-// 			} ; 
-// 	}
-
-// }
+	uploadUserInfo (userMap) {
+		FirebaseFirestore.instance.collection("users") 
+			.add(userMap).catchError; (e) {
+				print(e.toString());
+			} ; 
+	}
+}

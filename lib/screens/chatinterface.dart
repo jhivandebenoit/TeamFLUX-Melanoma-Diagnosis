@@ -52,8 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 //uploading the image 
-  uploadeImage() async{
-    final request = http.MultipartRequest("POST", Uri.parse("https://276a-2402-4000-2280-f6d5-4d1c-6ddc-9ca6-56da.ngrok.io/upload"));
+  uploadeImage() async {
+    final request = http.MultipartRequest("POST", Uri.parse("https://melanoma-test.azurewebsites.net/predict"));
     final headers = { "Content-type": "multipart/form-data" };
 
     request.files.add (
@@ -65,10 +65,11 @@ class _MyHomePageState extends State<MyHomePage> {
     final response = await request.send();
 
     http.Response res = await http.Response.fromStream(response);
-    final resJson = json.decode(res.body );
-    message = resJson['message'];
+    final resJson = jsonDecode(res.body );
+    message = resJson['prediction'];
+    print(message);
     setState(() {});
-  }
+  } 
 
 	@override
 	Widget build(BuildContext context) {

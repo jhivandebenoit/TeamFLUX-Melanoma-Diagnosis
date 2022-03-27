@@ -1,62 +1,34 @@
 {
   "project_info": {
-    "project_number": "771627146521",
-    "project_id": "melano-login-a1",
-    "storage_bucket": "melano-login-a1.appspot.com"
+    "project_number": "357598154848",
+    "project_id": "melano-auth",
+    "storage_bucket": "melano-auth.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:771627146521:android:c658a4ec8c1756d386f988",
+        "mobilesdk_app_id": "1:357598154848:android:1b4680ba7f0ee3da5df305",
+
         "android_client_info": {
           "package_name": "com.example.chat_ui"
         }
       },
       "oauth_client": [
         {
-          "client_id": "771627146521-u0egjisluajr5gpcsncvql8hg3k94kn2.apps.googleusercontent.com",
+          "client_id": "357598154848-a9mmif7b6jp1l92jrlc1lk4550bp5f6h.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCWOPvekYMCXn7PsAaM12zBLphN8ZJdlKo"
+          "current_key": "AIzaSyCjIIJVSIBwUun-K9fCB2jDdjWBm4-iqf4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "771627146521-u0egjisluajr5gpcsncvql8hg3k94kn2.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:771627146521:android:558c7cc36ecaff2586f988",
-        "android_client_info": {
-          "package_name": "com.example.melano_sdgp"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "771627146521-u0egjisluajr5gpcsncvql8hg3k94kn2.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCWOPvekYMCXn7PsAaM12zBLphN8ZJdlKo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "771627146521-u0egjisluajr5gpcsncvql8hg3k94kn2.apps.googleusercontent.com",
+              "client_id": "357598154848-a9mmif7b6jp1l92jrlc1lk4550bp5f6h.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

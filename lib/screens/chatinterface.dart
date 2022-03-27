@@ -1,4 +1,9 @@
 // import 'dart:html';
+import 'dart:convert';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_dialogflow/dialogflow_v2.dart';
@@ -14,12 +19,11 @@ class MyHomePage extends StatefulWidget {
 	_MyHomePageState createState() => _MyHomePageState();
 }
 
-// File? selectedImage;
-String? message = " ";
-
 class _MyHomePageState extends State<MyHomePage> {
-// this is the Dialogflow API call and its commented out for the Python file @Nemsara 
+  File? selectedImage;
+  String? message = " ";
 
+// this is the Dialogflow API call and its commented out for the Python file @Nemsara 
 	void response(query) async {
 		AuthGoogle authGoogle = await AuthGoogle(
 				fileJson: "assets/melano-chatbot-nlru-8b72c52e3531.json"
@@ -39,6 +43,32 @@ class _MyHomePageState extends State<MyHomePage> {
 
 	final messageInsert = TextEditingController();
 	List<Map> messages = [ ];
+
+// loading the image 
+  Future getImage() async {
+    final pickedImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+    selectedImage = File(pickedImage.path);
+    setState(() {});
+  }
+
+//uploading the image 
+  uploadeImage() async{
+    final request = http.MultipartRequest("POST", Uri.parse("https://276a-2402-4000-2280-f6d5-4d1c-6ddc-9ca6-56da.ngrok.io/upload"));
+    final headers = { "Content-type": "multipart/form-data" };
+
+    request.files.add (
+        http.MultipartFile('image', selectedImage!.readAsBytes().asStream(),selectedImage!.lengthSync(),
+        filename: selectedImage!.path.split("/").last)
+    );
+    
+    request.headers.addAll(headers);
+    final response = await request.send();
+
+    http.Response res = await http.Response.fromStream(response);
+    final resJson = json.decode(res.body );
+    message = resJson['message'];
+    setState(() {});
+  }
 
 	@override
 	Widget build(BuildContext context) {
@@ -72,7 +102,14 @@ class _MyHomePageState extends State<MyHomePage> {
 						)
 						),
 
-						SizedBox( height: 20.0 ),
+						// SizedBox( height: 20.0 ),
+                        selectedImage == null 
+                            ? Text("No Images Selected ") 
+                            : Image.file(selectedImage!),
+                        IconButton(
+                            onPressed: uploadeImage,
+                            icon: const Icon(Icons.upload) 
+                        ),
 
 						Divider( 
 							height: 5.0,
@@ -120,11 +157,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Icons.camera_alt,
                                         size: 28.0,
                                     ),
-                                    onPressed: () {
-                                      //-----------------------------------
-                                              
-                                                                    
-                                    },
+                                    onPressed : 
+                                        getImage,
 							),
 
 								trailing: IconButton (
@@ -137,6 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
 									onPressed: () { 
 										if (messageInsert.text.isEmpty) {
 											print("Message is Empty");
+                      
 										} else {
 											setState(() {
 											messages.insert(0,
@@ -156,7 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
 							),
 						),
 
-						SizedBox( height: 10.0 )
+						SizedBox( height: 50.0 )
 
 					],
 				),

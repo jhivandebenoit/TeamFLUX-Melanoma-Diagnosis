@@ -82,6 +82,7 @@ class _SignInState extends State<SignIn> {
                                                   child: Column (
                                                       mainAxisSize: MainAxisSize.min,
                                                   children: [ 
+                                                    SizedBox(height: 80.0),
                                                       Form(
                                                           key: formKey,
                                                           child: Column(
@@ -109,7 +110,6 @@ class _SignInState extends State<SignIn> {
                                                                         ),
                                                               ]),
                                                       ),
-                                                    SizedBox(height: 80.0),
 
                                                 //     TextField(
                                                 //         controller: emailTextEditingController,

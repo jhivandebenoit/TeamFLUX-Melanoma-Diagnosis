@@ -1,12 +1,10 @@
-// import 'dart:html';
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import 'package:dialogflow_flutter/dialogflowFlutter.dart';
 import 'package:dialogflow_flutter/googleAuth.dart';
 import 'package:dialogflow_flutter/language.dart';
@@ -15,63 +13,64 @@ class MyHomePage extends StatefulWidget {
 	// MyHomePage({  Key? key,  required this.title }) : super(key: key);
 	// final String title ;
 
-	@override
-	_MyHomePageState createState() => _MyHomePageState();
+    @override
+    _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  File? selectedImage;
-  String? message = " ";
+    File? selectedImage;
+    String? message = " " ;
 
 // this is the Dialogflow API call and its commented out for the Python file @Nemsara 
-	void response(query) async {
+    void response(query) async {
 		AuthGoogle authGoogle = await AuthGoogle(
-				fileJson: "assets/melano-chatbot-nlru-8b72c52e3531.json"
-				) .build() ;
-		DialogFlow dialogflow = DialogFlow( authGoogle: authGoogle, language: Language.english);
+            fileJson: "assets/melano-chatbot-nlru-8b72c52e3531.json"
+		) .build() ;
+        DialogFlow dialogflow = DialogFlow( authGoogle: authGoogle, language: Language.english);
 		AIResponse aiResponse = await dialogflow.detectIntent(query);
 		setState(() {
 			messages.insert(0, {
 				"data": 0,
 				"message": aiResponse.getListMessage()[0]["text"]["text"][0].toString()
-			});
-		});
-
-		print( aiResponse.getListMessage()[0]["text"]["text"][0].toString() );
-		
+			} );
+		} );
+    
+        print( aiResponse.getListMessage()[0]["text"]["text"][0].toString() );	
 	}
 
-	final messageInsert = TextEditingController();
-	List<Map> messages = [ ];
+    final messageInsert = TextEditingController();
+    List<Map> messages = [ ];
 
-// loading the image 
-  Future getImage() async {
-    final pickedImage = await ImagePicker.pickImage(source: ImageSource.gallery);
-    selectedImage = File(pickedImage.path);
-    setState(() {});
-  }
+    // loading the image 
+    Future getImage() async {
+        final pickedImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+        selectedImage = File(pickedImage.path);
+        setState(() {});
+    }
 
-//uploading the image 
-  uploadeImage() async {
-    final request = http.MultipartRequest("POST", Uri.parse("https://melanoma-test.azurewebsites.net/predict"));
-    final headers = { "Content-type": "multipart/form-data" };
-
-    request.files.add (
-        http.MultipartFile('image', selectedImage!.readAsBytes().asStream(),selectedImage!.lengthSync(),
-        filename: selectedImage!.path.split("/").last)
-    );
+    //uploading the image 
+    uploadeImage() async {
+        final request = http.MultipartRequest("POST", Uri.parse("https://melanoma-test.azurewebsites.net/predict"));
+        final headers = { "Content-type": "multipart/form-data" };
+        
+        request.files.add (
+            http.MultipartFile('image', selectedImage!.readAsBytes().asStream(),selectedImage!.lengthSync(),
+            filename: selectedImage!.path.split("/").last)
+        );
     
-    request.headers.addAll(headers);
-    final response = await request.send();
+        request.headers.addAll(headers);
+        final response = await request.send();
+        http.Response res = await http.Response.fromStream(response);
+        final resJson = jsonDecode(res.body );
+        message = resJson['prediction'];
+        print(message);
+        double message_value =  double.parse(message!) ;
+        double a = message_value*100;
+        print(a);
+        setState(() {});
+    } 
 
-    http.Response res = await http.Response.fromStream(response);
-    final resJson = jsonDecode(res.body );
-    message = resJson['prediction'];
-    print(message);
-    setState(() {});
-  } 
-
-	@override
+    @override
 	Widget build(BuildContext context) {
 		return Scaffold(
 			appBar: AppBar(
@@ -105,8 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
 						// SizedBox( height: 20.0 ),
                         selectedImage == null 
-                            ? Text("No Images Selected ") 
-                            : Image.file(selectedImage!),
+                            ? const Text("No Images Selected ")
+                            : Image.file(selectedImage!) ,Text (message.toString() ) ,
                         IconButton(
                             onPressed: uploadeImage,
                             icon: const Icon(Icons.upload) 
@@ -153,17 +152,15 @@ class _MyHomePageState extends State<MyHomePage> {
 								),
  
 								leading: IconButton ( 
-
                                     icon: Icon (
                                         Icons.camera_alt,
                                         size: 28.0,
                                     ),
                                     onPressed : 
                                         getImage,
-							),
+							    ),
 
 								trailing: IconButton (
-									
 									icon:  Icon(
 										Icons.send,
 										size: 30.0,
@@ -174,10 +171,10 @@ class _MyHomePageState extends State<MyHomePage> {
 											print("Message is Empty");
                       
 										} else {
-											setState(() {
+											setState( () {
 											messages.insert(0,
 													{ "data" : 1, "message" : messageInsert.text } );
-											});
+											} );
 
 											response(messageInsert.text);
 											messageInsert.clear();
@@ -203,7 +200,6 @@ class _MyHomePageState extends State<MyHomePage> {
 	Widget chat (String message, int data) {
 		return Container(
 			padding: EdgeInsets.only(left: 10, right: 10),
-
 			child: Row(
 				mainAxisAlignment: data == 1 ? MainAxisAlignment.end : MainAxisAlignment.start,
 				children: [
@@ -212,7 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
 						width: 40.0,
 						child: CircleAvatar (
 							backgroundImage: AssetImage ("assets/images/Logo-draft-clear-2.png"),
-						),
+						)
 					) : Container(),
 
 					Padding (
@@ -247,17 +243,11 @@ class _MyHomePageState extends State<MyHomePage> {
 						),
 					),
 
-					data == 1 ? Container (
-						// height: 60.0,
-						// width: 60.0,
-						// child: CircleAvatar (
-						// 	backgroundImage: AssetImage("assets/default.jpg"),
-						// 	),
-					) : Container() ,
-
+					data == 1 
+                        ? Container () 
+                        : Container() ,
 				],
 			),
-			
 		);
 	}
 }

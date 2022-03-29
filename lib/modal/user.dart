@@ -1,7 +1,7 @@
 class userdata {
 
-	String userId;
+  String userId;
 
-	userdata ({ required this.userId});
+  userdata ({ required this.userId});
 
 }

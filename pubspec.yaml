@@ -75,6 +75,7 @@ flutter:
     - assets/images/Logo-draft-clear-2.png
     - assets/dialogflow-chat.json
     - assets/melano-chatbot-nlru-8b72c52e3531.json
+    - assets/melano-chatbot-lqci-b6060c1d3e0c.json
     - assets/images/AppBar.png
     - assets/images/AppBar2.png
 

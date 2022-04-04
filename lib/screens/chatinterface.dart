@@ -24,7 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
 // this is the Dialogflow API call and its commented out for the Python file @Nemsara 
     void response(query) async {
 		AuthGoogle authGoogle = await AuthGoogle(
-            fileJson: "assets/melano-chatbot-nlru-8b72c52e3531.json"
+            fileJson: "assets/melano-chatbot-lqci-b6060c1d3e0c.json"
 		) .build() ;
         DialogFlow dialogflow = DialogFlow( authGoogle: authGoogle, language: Language.english);
 		AIResponse aiResponse = await dialogflow.detectIntent(query);

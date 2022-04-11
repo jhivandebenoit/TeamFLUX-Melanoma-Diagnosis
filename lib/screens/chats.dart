@@ -1,5 +1,6 @@
 import 'package:chat_ui/helper/authenticate.dart';
 import 'package:chat_ui/screens/chatinterface.dart';
+import 'package:chat_ui/screens/reminderpage.dart';
 import 'package:flutter/material.dart';
 
 class ChatRoom extends StatefulWidget {
@@ -88,7 +89,7 @@ class _ChatRoomState extends State<ChatRoom> {
             GestureDetector(
                   onTap: () {
                       Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => MyHomePage()
+                      builder: (context) => Reminderpage()
                       ));
                   },
                   child: Center (

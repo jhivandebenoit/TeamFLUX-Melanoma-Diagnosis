@@ -9,11 +9,11 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
 	WidgetsFlutterBinding.ensureInitialized();
 		await Firebase.initializeApp();
-	runApp(MyApp());
+	runApp(Melano());
 }
 
-class MyApp extends StatelessWidget {
-	MyApp({Key? key}) : super(key: key);
+class Melano extends StatelessWidget {
+	Melano({Key? key}) : super(key: key);
 
 	// This widget is the root of your application.
 	@override

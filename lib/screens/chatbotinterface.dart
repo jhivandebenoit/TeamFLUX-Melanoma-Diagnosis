@@ -34,12 +34,13 @@ class _MyHomePageState extends State<MyHomePage> {
 				"message": aiResponse.getListMessage()[0]["text"]["text"][0].toString()
 			} );
 		} );
-    
+
         print( aiResponse.getListMessage()[0]["text"]["text"][0].toString() );	
 	}
 
     final messageInsert = TextEditingController();
     List<Map> messages = [ ];
+    
 
     // loading the image 
     Future getImage() async {
@@ -105,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
 						// SizedBox( height: 20.0 ),
                         selectedImage == null 
                             ? const Text("No Images Selected ")
-                            : Image.file(selectedImage!) ,Text (message.toString() ) ,
+                            : Image.file(selectedImage!) , Text (message!),
                         IconButton(
                             onPressed: uploadeImage,
                             icon: const Icon(Icons.upload) 
@@ -157,7 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         size: 28.0,
                                     ),
                                     onPressed : 
-                                        getImage,
+                                        getImage,    
 							    ),
 
 								trailing: IconButton (

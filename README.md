@@ -1,16 +1,8 @@
-# chat_ui
+# Melano - Melanoma Diagnosis
 
-A new Flutter project.
+## Description
+This application aims to help people understand the possible dangers of unidentified skin lesions and provide a user friendly way for them to recieve a diagnosis.
 
-## Getting Started
+## Details
+This app is built in **Flutter**. The machine learning component is available [here](https://github.com/jhivandebenoit/Melanoma_Detection)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

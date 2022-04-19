@@ -1,5 +1,7 @@
 import 'package:chat_ui/helper/authenticate.dart';
-import 'package:chat_ui/screens/chatinterface.dart';
+import 'package:chat_ui/screens/aboutmelano.dart';
+import 'package:chat_ui/screens/chatbotinterface.dart';
+import 'package:chat_ui/screens/previousscans.dart';
 import 'package:chat_ui/screens/reminderpage.dart';
 import 'package:flutter/material.dart';
 
@@ -67,7 +69,7 @@ class _ChatRoomState extends State<ChatRoom> {
             GestureDetector(
                   onTap: () {
                       Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => MyHomePage()
+                      builder: (context) => Previousscans()
                       ));
                   },
                   child: Center (
@@ -76,7 +78,7 @@ class _ChatRoomState extends State<ChatRoom> {
                           child : Padding (
                               padding: EdgeInsets.symmetric(horizontal: 60.0, vertical: 25.0),
                           child: Text (
-                              "Previous Scan",
+                              "**Previous Scan**",
                               style : TextStyle (
                                   fontSize: 18.0,
                                   color : Colors.black,
@@ -111,7 +113,7 @@ class _ChatRoomState extends State<ChatRoom> {
               GestureDetector(
                   onTap: () {
                       Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => MyHomePage()
+                      builder: (context) => AboutMelano()
                       ));
                   },
                   child: Center (

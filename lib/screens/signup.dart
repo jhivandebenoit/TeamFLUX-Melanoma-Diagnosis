@@ -1,4 +1,4 @@
-import 'package:chat_ui/screens/chats.dart';
+import 'package:chat_ui/screens/homescreen.dart';
 import 'package:chat_ui/widgets/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_ui/services/authentication.dart';

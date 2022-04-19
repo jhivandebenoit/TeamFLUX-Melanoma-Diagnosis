@@ -20,7 +20,14 @@ class _ReminderpageState extends State<Reminderpage> {
     Widget build(BuildContext context) {
         return Scaffold(
             appBar: AppBar(
-                title: Text("Reminders"),
+				title: Text (
+                    "Reminders",
+                    style: TextStyle (
+                        color: Colors.white,
+                    ),
+                ),
+                backgroundColor: Color.fromRGBO(49, 163, 139, 0.663),
+                elevation: 0,
             ),
             floatingActionButton: FloatingActionButton(
                 onPressed: () {
